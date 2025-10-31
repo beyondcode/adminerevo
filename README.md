@@ -1,6 +1,19 @@
+# Adapt AdminerEvo for Laravel Herd
+
+1. Clone this repository
+2. `git submodule update --init``
+3. `composer install`
+4. Make changes, then compile a single file version with `php compile.php` (ignore the warnings)
+5. Test changes on Mac: Copy generated `adminer-4.8.4.php` file as `adminer.php` to `/Applications/Herd.app/Contents/Resources/valet/adminer` (NOT the `herd-macos` folder!)
+6. When done, overwrite `herd-macos/PHP/valet/adminer/adminer.php` with the generated file.
+
+Modifiying `adminer.php` directly will lead to funny encoding issues, so... don't do that to yourself. ❤️
+
+
+
 # AdminerEvo
 
-**Adminer** - Database management in a single PHP file  
+**Adminer** - Database management in a single PHP file
 **Adminer Editor** - Data manipulation for end-users
 
 ## A bit of history

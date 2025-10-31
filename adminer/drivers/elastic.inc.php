@@ -14,7 +14,7 @@ if (isset($_GET["elastic"])) {
 			 * @param string $method
 			 * @return array|false
 			 */
-			function rootQuery($path, array $content = null, $method = 'GET') {
+			function rootQuery($path, null|array $content = null, $method = 'GET') {
 				@ini_set('track_errors', 1); // @ - may be disabled
 				$file = @file_get_contents("$this->_url/" . ltrim($path, '/'), false, stream_context_create(array('http' => array(
 					'method' => $method,
@@ -54,7 +54,7 @@ if (isset($_GET["elastic"])) {
 			 * @param string $method
 			 * @return array|false
 			 */
-			function query($path, array $content = null, $method = 'GET') {
+			function query($path, null|array $content = null, $method = 'GET') {
 				return $this->rootQuery(($this->_db != "" ? "$this->_db/" : "/") . ltrim($path, '/'), $content, $method);
 			}
 
