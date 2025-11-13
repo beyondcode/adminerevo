@@ -29,8 +29,8 @@ if (isset($_GET["clickhouse"])) {
 				return false;
 			}
 
-			if (!preg_match('~^HTTP/[0-9.]+ 2~i', $http_response_header[0])) {
-				foreach ($http_response_header as $header) {
+			if (!preg_match('~^HTTP/[0-9.]+ 2~i', http_get_last_response_headers()[0])) {
+				foreach (http_get_last_response_headers() as $header) {
 					if (preg_match('~^X-ClickHouse-Exception-Code:~i', $header)) {
 						$this->error = preg_replace('~\(version [^(]+\(.+$~', '', $file);
 						return false;
