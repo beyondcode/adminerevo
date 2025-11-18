@@ -36,7 +36,9 @@ if (isset($_GET["elastic"])) {
 					return false;
 				}
 
-				if (!preg_match('~^HTTP/[0-9.]+ 2~i', http_get_last_response_headers()[0])) {
+                $httpResponseHeader = function_exists('http_get_last_response_headers') ? http_get_last_response_headers()[0] : $http_response_header[0];
+
+				if (!preg_match('~^HTTP/[0-9.]+ 2~i', $httpResponseHeader)) {
 					if (isset($return['error']['root_cause'][0]['type'])) {
 						$this->error = $return['error']['root_cause'][0]['type'] . ": " . $return['error']['root_cause'][0]['reason'];
 					} else {
