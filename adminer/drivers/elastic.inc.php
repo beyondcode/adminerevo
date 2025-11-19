@@ -36,9 +36,15 @@ if (isset($_GET["elastic"])) {
 					return false;
 				}
 
-                $httpResponseHeader = function_exists('http_get_last_response_headers') ? http_get_last_response_headers()[0] : $http_response_header[0];
+				if (function_exists('http_get_last_response_headers')) {
+					$httpResponseHeader = http_get_last_response_headers();
+				} else {
+					$varName = 'http_response_header';
+					$httpResponseHeader = $$varName;
+				}
+              
 
-				if (!preg_match('~^HTTP/[0-9.]+ 2~i', $httpResponseHeader)) {
+				if (!preg_match('~^HTTP/[0-9.]+ 2~i', $httpResponseHeader[0])) {
 					if (isset($return['error']['root_cause'][0]['type'])) {
 						$this->error = $return['error']['root_cause'][0]['type'] . ": " . $return['error']['root_cause'][0]['reason'];
 					} else {

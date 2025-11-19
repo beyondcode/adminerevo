@@ -29,7 +29,12 @@ if (isset($_GET["clickhouse"])) {
 				return false;
 			}
 
-			$httpResponseHeader = function_exists('http_get_last_response_headers') ? http_get_last_response_headers() : $http_response_header;
+			if (function_exists('http_get_last_response_headers')) {
+				$httpResponseHeader = http_get_last_response_headers();
+			} else {
+				$varName = 'http_response_header';
+				$httpResponseHeader = $$varName;
+			}          
 
 			if (!preg_match('~^HTTP/[0-9.]+ 2~i', $httpResponseHeader[0])) {
 				foreach ($httpResponseHeader as $header) {
